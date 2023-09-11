@@ -12,7 +12,7 @@ name.Name = "name" name.Text = "Funi SB menu" name.Font = Enum.Font.RobotoMono n
 local button = Instance.new("TextButton",TP) button.Name = "button" button.Text = "hide/show" button.Font = Enum.Font.RobotoMono button.TextScaled = true button.BackgroundTransparency = 1 button.Size = UDim2.new({0.22, 0},{1, 0}) button.Position = UDim2.new({0.78, 0},{0, 0})
 local mainfr = Instance.new("ScrollingFrame",TP) mainfr.Name = "MainFrame" mainfr.Size = UDim2.new({1, 0},{8.913, 0}) mainfr.Position = UDim2.new({0, 0},{1, 0}) mainfr.BackgroundColor3 = Color3.fromRGB(39, 39, 39) mainfr.BackgroundTransparency = .1
 mainfr.CanvasSize = UDim2.new(0,0,0,0) mainfr.AutomaticCanvasSize = "Y" mainfr.ScrollingDirection = "Y" mainfr.ScrollBarThickness = 0 mainfr.ScrollBarImageTransparency = 1
-local list = Instance.new("UIListLayout",mainfr) list.Padding = Vector2.new(.05,0)
+local list = Instance.new("UIListLayout",mainfr) list.Padding = UDim.new(.05,0)
 local avButton = Instance.new("TextButton",mainfr) avButton.Name = "antivoid" avButton.BackgroundColor3 = Color3.fromRGB(255, 0, 4) avButton.Text = "Anti Void" avButton.Font = Enum.Font.RobotoMono avButton.Size = UDim2.new({1, 0},{0.192, 0}) avButton.TextScaled = true
 local auraButton = Instance.new("TextButton",mainfr) avButton.Name = "aura" avButton.BackgroundColor3 = Color3.fromRGB(255, 0, 4) avButton.Text = "Slap Aura" avButton.Font = Enum.Font.RobotoMono avButton.Size = UDim2.new({1, 0},{0.192, 0}) avButton.TextScaled = true
 local arButton = Instance.new("TextButton",mainfr) avButton.Name = "antiragdoll" avButton.BackgroundColor3 = Color3.fromRGB(255, 0, 4) avButton.Text = "Anti Ragdoll" avButton.Font = Enum.Font.RobotoMono avButton.Size = UDim2.new({1, 0},{0.192, 0}) avButton.TextScaled = true
