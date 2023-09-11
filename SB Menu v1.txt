@@ -4,6 +4,7 @@ local auraToggle = false
 local antiVToggle = false
 
 local gui = Instance.new("ScreenGui",game.CoreGui)
+gui.Enabled = true
 gui.ResetOnSpawn = false
 local TP = Instance.new("Frame",gui)
 TP.Size = UDim2.new({0.163, 0},{0.033, 0}) TP.Name = "TopFrame" TP.Position = UDim2.new({0.025, 0},{0.641, 0})
@@ -13,9 +14,9 @@ local button = Instance.new("TextButton",TP) button.Name = "button" button.Text 
 local mainfr = Instance.new("ScrollingFrame",TP) mainfr.Name = "MainFrame" mainfr.Size = UDim2.new({1, 0},{8.913, 0}) mainfr.Position = UDim2.new({0, 0},{1, 0}) mainfr.BackgroundColor3 = Color3.fromRGB(39, 39, 39) mainfr.BackgroundTransparency = .1
 mainfr.CanvasSize = UDim2.new(0,0,0,0) mainfr.AutomaticCanvasSize = "Y" mainfr.ScrollingDirection = "Y" mainfr.ScrollBarThickness = 0 mainfr.ScrollBarImageTransparency = 1
 local list = Instance.new("UIListLayout",mainfr) list.Padding = UDim.new(.05,0)
-local avButton = Instance.new("TextButton",mainfr) avButton.Name = "antivoid" avButton.BackgroundColor3 = Color3.fromRGB(255, 0, 4) avButton.Text = "Anti Void" avButton.Font = Enum.Font.RobotoMono avButton.Size = UDim2.new({1, 0},{0.192, 0}) avButton.TextScaled = true
-local auraButton = Instance.new("TextButton",mainfr) avButton.Name = "aura" avButton.BackgroundColor3 = Color3.fromRGB(255, 0, 4) avButton.Text = "Slap Aura" avButton.Font = Enum.Font.RobotoMono avButton.Size = UDim2.new({1, 0},{0.192, 0}) avButton.TextScaled = true
-local arButton = Instance.new("TextButton",mainfr) avButton.Name = "antiragdoll" avButton.BackgroundColor3 = Color3.fromRGB(255, 0, 4) avButton.Text = "Anti Ragdoll" avButton.Font = Enum.Font.RobotoMono avButton.Size = UDim2.new({1, 0},{0.192, 0}) avButton.TextScaled = true
+local avButton = Instance.new("TextButton",mainfr) avButton.Name = "antivoid"  avButton.BackgroundColor3 = Color3.fromRGB(255, 0, 4) avButton.Text = "Anti Void" avButton.Font = Enum.Font.RobotoMono avButton.Size = UDim2.new({1, 0},{0.192, 0}) avButton.TextScaled = true
+local auraButton = Instance.new("TextButton",mainfr) auraButton.Name = "aura" auraButton.BackgroundColor3 = Color3.fromRGB(255, 0, 4) auraButton.Text = "Slap Aura" auraButton.Font = Enum.Font.RobotoMono auraButton.Size = UDim2.new({1, 0},{0.192, 0}) auraButton.TextScaled = true
+local arButton = Instance.new("TextButton",mainfr) arButton.Name = "antiragdoll" arButton.BackgroundColor3 = Color3.fromRGB(255, 0, 4) arButton.Text = "Anti Ragdoll" arButton.Font = Enum.Font.RobotoMono arButton.Size = UDim2.new({1, 0},{0.192, 0}) arButton.TextScaled = true
 
 arButton.MouseButton1Click:Connect(function()
 	if antiRToggle == false then
@@ -26,7 +27,7 @@ arButton.MouseButton1Click:Connect(function()
 		arButton.BackgroundColor3 = Color3.fromRGB(255, 0, 4)
 	end
 end)
-auraToggle.MouseButton1Click:Connect(function()
+auraButton.MouseButton1Click:Connect(function()
 	if auraToggle == false then
 		auraToggle = true
 		auraButton.BackgroundColor3 = Color3.fromRGB(26, 255, 0)
