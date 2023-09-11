@@ -83,7 +83,7 @@ function slapaura(char)
 	end
 end
 function checkifragdolled(char)
-	if auraToggle == true then
+	if antiRToggle == true then
 		task.wait(0.5)
 		char.Ragdolled.Changed:Connect(function ()
 			if char.Ragdolled.Value == true then
