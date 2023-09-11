@@ -1,0 +1,111 @@
+local plr = game.Players.LocalPlayer or game.Players.PlayerAdded:Wait()
+local antiRToggle = false
+local auraToggle = false
+local antiVToggle = false
+
+local gui = Instance.new("ScreenGui",game.CoreGui)
+gui.ResetOnSpawn = false
+local TP = Instance.new("Frame",gui)
+TP.Size = UDim2.new({0.163, 0},{0.033, 0}) TP.Name = "TopFrame" TP.Position = UDim2.new({0.025, 0},{0.641, 0})
+local name = Instance.new("TextLabel",TP)
+name.Name = "name" name.Text = "Funi SB menu" name.Font = Enum.Font.RobotoMono name.TextScaled = true name.BackgroundTransparency = 1 name.Size = UDim2.new({0.862, 0},{1, 0})
+local button = Instance.new("TextButton",TP) button.Name = "button" button.Text = "hide/show" button.Font = Enum.Font.RobotoMono button.TextScaled = true button.BackgroundTransparency = 1 button.Size = UDim2.new({0.22, 0},{1, 0}) button.Position = UDim2.new({0.78, 0},{0, 0})
+local mainfr = Instance.new("ScrollingFrame",TP) mainfr.Name = "MainFrame" mainfr.Size = UDim2.new({1, 0},{8.913, 0}) mainfr.Position = UDim2.new({0, 0},{1, 0}) mainfr.BackgroundColor3 = Color3.fromRGB(39, 39, 39) mainfr.BackgroundTransparency = .1
+mainfr.CanvasSize = UDim2.new(0,0,0,0) mainfr.AutomaticCanvasSize = "Y" mainfr.ScrollingDirection = "Y" mainfr.ScrollBarThickness = 0 mainfr.ScrollBarImageTransparency = 1
+local list = Instance.new("UIListLayout",mainfr) list.Padding = Vector2.new(.05,0)
+local avButton = Instance.new("TextButton",mainfr) avButton.Name = "antivoid" avButton.BackgroundColor3 = Color3.fromRGB(255, 0, 4) avButton.Text = "Anti Void" avButton.Font = Enum.Font.RobotoMono avButton.Size = UDim2.new({1, 0},{0.192, 0}) avButton.TextScaled = true
+local auraButton = Instance.new("TextButton",mainfr) avButton.Name = "aura" avButton.BackgroundColor3 = Color3.fromRGB(255, 0, 4) avButton.Text = "Slap Aura" avButton.Font = Enum.Font.RobotoMono avButton.Size = UDim2.new({1, 0},{0.192, 0}) avButton.TextScaled = true
+local arButton = Instance.new("TextButton",mainfr) avButton.Name = "antiragdoll" avButton.BackgroundColor3 = Color3.fromRGB(255, 0, 4) avButton.Text = "Anti Ragdoll" avButton.Font = Enum.Font.RobotoMono avButton.Size = UDim2.new({1, 0},{0.192, 0}) avButton.TextScaled = true
+
+arButton.MouseButton1Click:Connect(function()
+	if antiRToggle == false then
+		antiRToggle = true
+		arButton.BackgroundColor3 = Color3.fromRGB(26, 255, 0)
+	else
+		antiRToggle = false
+		arButton.BackgroundColor3 = Color3.fromRGB(255, 0, 4)
+	end
+end)
+auraToggle.MouseButton1Click:Connect(function()
+	if auraToggle == false then
+		auraToggle = true
+		auraButton.BackgroundColor3 = Color3.fromRGB(26, 255, 0)
+	else
+		auraToggle = false
+		auraButton.BackgroundColor3 = Color3.fromRGB(255, 0, 4)
+	end
+end)
+button.MouseButton1Click:Connect(function()
+	if mainfr.Visible == true then
+		mainfr.Visible = false
+	else
+		mainfr.Visible = true
+	end
+end)
+local antivoid = Instance.new("Part", workspace)
+antivoid.Name = "antivoid"
+antivoid.Anchored = true antivoid.Transparency = 1
+antivoid.Position = Vector3.new(0,-9,2)
+antivoid.Size = Vector3.new(2048, 2, 2048)
+antivoid.CanCollide = false
+avButton.MouseButton1Click:Connect(function()
+	if antiVToggle == false then
+		antiVToggle = true
+		avButton.BackgroundColor3 = Color3.fromRGB(26, 255, 0)
+		antivoid.CanCollide = true
+	else
+		antiVToggle = false
+		avButton.BackgroundColor3 = Color3.fromRGB(255, 0, 4)
+		antivoid.CanCollide = false
+	end
+end)
+function slapaura(char)
+	task.wait(.5)
+	while task.wait(.1) do
+		if auraToggle == true then
+			for i,plr in pairs(game.Players:GetChildren()) do
+				if plr.Character ~= nil then
+					local char2 = plr.Character
+					if char2:FindFirstChild("HumanoidRootPart") then
+						if not char2.Head:FindFirstChild("UnoReverseCard") then
+							local distance = (char.HumanoidRootPart.Position-char2.HumanoidRootPart.Position).Magnitude
+							if distance < 75 then
+								game.ReplicatedStorage.b:FireServer(char2["Right Arm"])
+								game.ReplicatedStorage.BrickHit:FireServer(char2["Right Arm"])
+								game.ReplicatedStorage.KSHit:FireServer(char2["Right Arm"])
+							end
+						end	
+					end
+				end	
+			end
+		end
+	end
+end
+function checkifragdolled(char)
+	if auraToggle == true then
+		task.wait(0.5)
+		char.Ragdolled.Changed:Connect(function ()
+			if char.Ragdolled.Value == true then
+				task.wait(.15)
+				for i,obj in pairs(char:GetDescendants()) do
+					if obj:IsA("Motor6D") then
+						obj.Enabled = true
+					elseif obj:IsA("BallSocketConstraint") then
+						obj:Destroy()
+					elseif obj.Name == "FakePart Left Leg" or obj.Name == "FakePart Head" or obj.Name == "FakePart Torso" or obj.Name == "FakePart Left Arm" or obj.Name == "FakePart Right Arm" then
+						obj:Destroy()
+					end
+				end
+				char.Humanoid:ChangeState(Enum.HumanoidStateType.Running)	
+			else
+				char.Humanoid:ChangeState(Enum.HumanoidStateType.Running)	
+			end	
+		end)
+	end
+end
+checkifragdolled(plr.Character)
+slapaura(plr.Character)
+plr.CharacterAdded:Connect(function (char)
+	checkifragdolled(char)
+	slapaura(char)
+end)
