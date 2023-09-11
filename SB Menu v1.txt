@@ -3,7 +3,7 @@ local antiRToggle = false
 local auraToggle = false
 local antiVToggle = false
 
-local gui = Instance.new("ScreenGui",game.CoreGui)
+local gui = Instance.new("ScreenGui",plr.PlayerGui)
 gui.Enabled = true
 gui.ResetOnSpawn = false
 local TP = Instance.new("Frame",gui)
