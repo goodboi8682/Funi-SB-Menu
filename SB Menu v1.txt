@@ -91,7 +91,7 @@ function checkifragdolled(char)
 				char.Anchored = true
 			else
 				char.Anchored = false
-				char:MoveTo() = pos
+				char:MoveTo(pos)
 				pos = char:WaitForChild("HumanoidRootPart",5).Position
 			end
 		end
