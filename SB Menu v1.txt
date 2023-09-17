@@ -83,26 +83,19 @@ function slapaura(char)
 	end
 end
 function checkifragdolled(char)
-	if antiRToggle == true then
-		task.wait(0.5)
-		char.Ragdolled.Changed:Connect(function ()
+	task.wait(0.5)
+	local pos = char:WaitForChild("HumanoidRootPart",5).Position
+	char.Ragdolled.Changed:Connect(function ()
+		if antiRToggle == true then
 			if char.Ragdolled.Value == true then
-				task.wait(.15)
-				for i,obj in pairs(char:GetDescendants()) do
-					if obj:IsA("Motor6D") then
-						obj.Enabled = true
-					elseif obj:IsA("BallSocketConstraint") then
-						obj:Destroy()
-					elseif obj.Name == "FakePart Left Leg" or obj.Name == "FakePart Head" or obj.Name == "FakePart Torso" or obj.Name == "FakePart Left Arm" or obj.Name == "FakePart Right Arm" then
-						obj:Destroy()
-					end
-				end
-				char.Humanoid:ChangeState(Enum.HumanoidStateType.Running)	
+				char.Anchored = true
 			else
-				char.Humanoid:ChangeState(Enum.HumanoidStateType.Running)	
-			end	
-		end)
-	end
+				char.Anchored = false
+				char:MoveTo() = pos
+				pos = char:WaitForChild("HumanoidRootPart",5).Position
+			end
+		end
+	end)
 end
 task.spawn(function()
 	checkifragdolled(plr.Character)
