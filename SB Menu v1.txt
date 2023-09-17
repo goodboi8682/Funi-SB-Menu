@@ -88,9 +88,17 @@ function checkifragdolled(char)
 	char.Ragdolled.Changed:Connect(function ()
 		if antiRToggle == true then
 			if char.Ragdolled.Value == true then
-				char.Anchored = true
+				for i,part in pairs(char:GetDescendants()) do
+					if part:IsA("BasePart") then
+						part.Anchored = true
+					end
+				end
 			else
-				char.Anchored = false
+				for i,part in pairs(char:GetDescendants()) do
+					if part:IsA("BasePart") then
+						part.Anchored = false
+					end
+				end
 				char:MoveTo(pos)
 				pos = char:WaitForChild("HumanoidRootPart",5).Position
 			end
