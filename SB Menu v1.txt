@@ -167,10 +167,11 @@ function gun(char)
 									game.ReplicatedStorage.b:FireServer(target.Parent["Right Arm"])
 									game.ReplicatedStorage.BrickHit:FireServer(target.Parent["Right Arm"])
 									game.ReplicatedStorage.KSHit:FireServer(target.Parent["Right Arm"])
-									wait(.02)
+									wait(.016)
 								end
 								local sound = gun.goofy:Clone() sound.Parent = h
 								sound:Play() task.spawn(function() task.wait(sound.TimeLength) sound:Destroy() end)
+								wait(.02)
 								plr.Character:MoveTo(pos)
 							end
 						end
