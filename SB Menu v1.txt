@@ -3,21 +3,23 @@ local antiRToggle = false
 local auraToggle = false
 local antiVToggle = false
 local mouse = plr:GetMouse()
+local TS = game:GetService("TweenService")
 
-local gui = Instance.new("ScreenGui",game.CoreGui)
+local gui = Instance.new("ScreenGui",plr.PlayerGui)
 gui.Enabled = true
 gui.ResetOnSpawn = false
-local TP = Instance.new("Frame",gui)
-TP.Size = UDim2.new(0.163, 0,0.033, 0) TP.Name = "TopFrame" TP.Position = UDim2.new(0.025, 0,0.641, 0)
-local name = Instance.new("TextLabel",TP)
-name.Name = "name" name.Text = "Funi SB menu" name.Font = Enum.Font.RobotoMono name.TextScaled = true name.BackgroundTransparency = 1 name.Size = UDim2.new(0.862, 0,1, 0)
-local button = Instance.new("TextButton",TP) button.Name = "button" button.Text = "hide/show" button.Font = Enum.Font.RobotoMono button.TextScaled = true button.BackgroundTransparency = 1 button.Size = UDim2.new(0.22, 0,1, 0) button.Position = UDim2.new(0.78, 0,0, 0)
-local mainfr = Instance.new("ScrollingFrame",TP) mainfr.Name = "MainFrame" mainfr.Size = UDim2.new(1, 0,8.913, 0) mainfr.Position = UDim2.new(0, 0,1, 0) mainfr.BackgroundColor3 = Color3.fromRGB(39, 39, 39) mainfr.BackgroundTransparency = .1
+local k = Instance.new("UIGradient",game.ReplicatedStorage) k.Rotation = -90 k.Color = ColorSequence.new{ColorSequenceKeypoint.new(0,Color3.fromRGB(120,120,120)),ColorSequenceKeypoint.new(0.221,Color3.fromRGB(255,255,255)),ColorSequenceKeypoint.new(1,Color3.fromRGB(255,255,255))}
+local TP = Instance.new("Frame",gui) k:Clone().Parent = TP
+TP.Size = UDim2.new(0.163, 0,0.033, 0) TP.Name = "TopFrame" TP.Position = UDim2.new(0.025, 0,0.641, 0) TP.BackgroundColor3 = Color3.fromRGB(255,255,255) TP.BorderSizePixel = 0
+local name = Instance.new("TextLabel",TP) name.BorderSizePixel = 0
+name.Name = "name" name.Text = "Funi SB menu" name.Font = Enum.Font.Cartoon name.TextScaled = true name.BackgroundTransparency = 1 name.Size = UDim2.new(0.876, 0,1, 0)
+local button = Instance.new("ImageButton",TP) button.Name = "button"  button.BackgroundTransparency = 1 button.Size = UDim2.new(0.091, 0,.739, 0) button.Position = UDim2.new(0.876, 0,.13, 0) button.BorderSizePixel = 0 button.Image = "rbxassetid://6760326863"
+local mainfr = Instance.new("ScrollingFrame",TP) mainfr.Name = "MainFrame" mainfr.Size = UDim2.new(1, 0,8.913, 0) mainfr.Position = UDim2.new(0, 0,1, 0) mainfr.BackgroundColor3 = Color3.fromRGB(39, 39, 39) mainfr.BackgroundTransparency = .1 mainfr.BorderSizePixel = 0
 mainfr.CanvasSize = UDim2.new(0,0,0,0) mainfr.AutomaticCanvasSize = "Y" mainfr.ScrollingDirection = "Y" mainfr.ScrollBarThickness = 0 mainfr.ScrollBarImageTransparency = 1
 local list = Instance.new("UIListLayout",mainfr) list.Padding = UDim.new(.05,0)
-local avButton = Instance.new("TextButton",mainfr) avButton.Name = "antivoid"  avButton.BackgroundColor3 = Color3.fromRGB(255, 0, 4) avButton.Text = "Anti Void" avButton.Font = Enum.Font.RobotoMono avButton.Size = UDim2.new(1, 0,0.192, 0) avButton.TextScaled = true
-local auraButton = Instance.new("TextButton",mainfr) auraButton.Name = "aura" auraButton.BackgroundColor3 = Color3.fromRGB(255, 0, 4) auraButton.Text = "Slap Aura" auraButton.Font = Enum.Font.RobotoMono auraButton.Size = UDim2.new(1, 0,0.192, 0) auraButton.TextScaled = true
-local arButton = Instance.new("TextButton",mainfr) arButton.Name = "antiragdoll" arButton.BackgroundColor3 = Color3.fromRGB(255, 0, 4) arButton.Text = "Anti Ragdoll" arButton.Font = Enum.Font.RobotoMono arButton.Size = UDim2.new(1, 0,0.192, 0) arButton.TextScaled = true
+local avButton = Instance.new("TextButton",mainfr) avButton.Name = "antivoid"  avButton.BackgroundColor3 = Color3.fromRGB(255, 0, 4) avButton.Text = "Anti Void" avButton.Font = Enum.Font.Cartoon avButton.Size = UDim2.new(1, 0,0.192, 0) avButton.TextScaled = true avButton.BorderSizePixel = 0 k:Clone().Parent = avButton
+local auraButton = Instance.new("TextButton",mainfr) auraButton.Name = "aura" auraButton.BackgroundColor3 = Color3.fromRGB(255, 0, 4) auraButton.Text = "Slap Aura" auraButton.Font = Enum.Font.Cartoon auraButton.Size = UDim2.new(1, 0,0.192, 0) auraButton.TextScaled = true auraButton.BorderSizePixel = 0 k:Clone().Parent = auraButton
+local arButton = Instance.new("TextButton",mainfr) arButton.Name = "antiragdoll" arButton.BackgroundColor3 = Color3.fromRGB(255, 0, 4) arButton.Text = "Anti Ragdoll" arButton.Font = Enum.Font.Cartoon arButton.Size = UDim2.new(1, 0,0.192, 0) arButton.TextScaled = true arButton.BorderSizePixel = 0 k:Clone().Parent = arButton
 
 local Gun = Instance.new("Tool",game.ReplicatedStorage)
 Gun.Name = "slap gun" Gun.ToolTip = "You're either a smartass or a pussy."
@@ -53,9 +55,18 @@ auraButton.MouseButton1Click:Connect(function()
 end)
 button.MouseButton1Click:Connect(function()
 	if mainfr.Visible == true then
-		mainfr.Visible = false
+		button.Rotation = 180
+		task.spawn(function()
+			TS:Create(mainfr,TweenInfo.new(.25,Enum.EasingStyle.Sine,Enum.EasingDirection.Out,0),{Size = UDim2.new(1,0,0,0)}):Play()
+			task.wait(.25)
+			mainfr.Visible = false
+		end)
 	else
-		mainfr.Visible = true
+		button.Rotation = 0
+		task.spawn(function()
+			TS:Create(mainfr,TweenInfo.new(.25,Enum.EasingStyle.Sine,Enum.EasingDirection.In,0),{Size = UDim2.new(1,0,8.913,0)}):Play()
+			mainfr.Visible = true
+		end)
 	end
 end)
 local antivoid = Instance.new("Part", workspace)
@@ -130,58 +141,58 @@ function gun(char)
 			cooldown = true
 			gun.shoot.activated:Play()
 			local function ray()
-			local dir = (mouse.Hit.Position-gun.shoot.Position).Unit*300
-			local raycast = workspace:Raycast(gun.shoot.Position,dir,params)
-			local function visualise()
-				local c = gun.shoot.Position+dir/2
-				local dis = dir.Magnitude
-				local bullet = Instance.new("Part",workspace)
-				bullet.Anchored = true
-				bullet.CastShadow = false bullet.CanQuery = false
-				bullet.CanCollide = false
-				bullet.BrickColor = BrickColor.new("Bright yellow")
-				bullet.Material = "Neon"
-				bullet.Transparency = 0.4
-				bullet.CFrame = CFrame.new(c,gun.shoot.Position)
-				bullet.Size = Vector3.new(.2,.2,dis)
-				game.Debris:AddItem(bullet,.2)
-			end
-			task.spawn(function ()
-				visualise()
-			end)
-			if raycast then
-				local target = raycast.Instance
-				if target.Parent:IsA("Accessory") then
-					table.insert(ignore,target)
-					params.FilterDescendantsInstances = ignore
-					return ray()
-				else
-					if target.Parent then
-						local h = target.Parent:FindFirstChild("Humanoid")
-						if h then
-							if target.Parent ~= char then
-								local pos = plr.Character.Torso.Position
-								plr.Character:MoveTo(target.Parent.Torso.Position)
-								wait(.04)
-								for i=1,3 do
-									game.ReplicatedStorage.b:FireServer(target.Parent["Right Arm"])
-									game.ReplicatedStorage.BrickHit:FireServer(target.Parent["Right Arm"])
-									game.ReplicatedStorage.KSHit:FireServer(target.Parent["Right Arm"])
-									wait(.016)
+				local dir = (mouse.Hit.Position-gun.shoot.Position).Unit*300
+				local raycast = workspace:Raycast(gun.shoot.Position,dir,params)
+				local function visualise()
+					local c = gun.shoot.Position+dir/2
+					local dis = dir.Magnitude
+					local bullet = Instance.new("Part",workspace)
+					bullet.Anchored = true
+					bullet.CastShadow = false bullet.CanQuery = false
+					bullet.CanCollide = false
+					bullet.BrickColor = BrickColor.new("Bright yellow")
+					bullet.Material = "Neon"
+					bullet.Transparency = 0.4
+					bullet.CFrame = CFrame.new(c,gun.shoot.Position)
+					bullet.Size = Vector3.new(.2,.2,dis)
+					game.Debris:AddItem(bullet,.2)
+				end
+				task.spawn(function ()
+					visualise()
+				end)
+				if raycast then
+					local target = raycast.Instance
+					if target.Parent:IsA("Accessory") then
+						table.insert(ignore,target)
+						params.FilterDescendantsInstances = ignore
+						return ray()
+					else
+						if target.Parent then
+							local h = target.Parent:FindFirstChild("Humanoid")
+							if h then
+								if target.Parent ~= char then
+									local pos = plr.Character.Torso.Position
+									plr.Character:MoveTo(target.Parent.Torso.Position)
+									wait(.04)
+									for i=1,3 do
+										game.ReplicatedStorage.b:FireServer(target.Parent["Right Arm"])
+										game.ReplicatedStorage.BrickHit:FireServer(target.Parent["Right Arm"])
+										game.ReplicatedStorage.KSHit:FireServer(target.Parent["Right Arm"])
+										wait(.016)
+									end
+									local sound = gun.goofy:Clone() sound.Parent = h
+									sound:Play() task.spawn(function() task.wait(sound.TimeLength) sound:Destroy() end)
+									wait(.02)
+									plr.Character:MoveTo(pos)
 								end
-								local sound = gun.goofy:Clone() sound.Parent = h
-								sound:Play() task.spawn(function() task.wait(sound.TimeLength) sound:Destroy() end)
-								wait(.02)
-								plr.Character:MoveTo(pos)
 							end
 						end
 					end
 				end
 			end
-		end
-		task.spawn(function ()
-			ray()
-		end)
+			task.spawn(function ()
+				ray()
+			end)
 		end
 		task.wait(.15)
 		cooldown = false
