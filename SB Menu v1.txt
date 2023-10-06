@@ -58,10 +58,10 @@ end)
 bhButton.MouseButton1Click:Connect(function()
 	if bhToggle == false then
 		bhToggle = true
-		auraButton.BackgroundColor3 = Color3.fromRGB(26, 255, 0)
+		bhButton.BackgroundColor3 = Color3.fromRGB(26, 255, 0)
 	else
 		bhToggle = false
-		auraButton.BackgroundColor3 = Color3.fromRGB(255, 0, 4)
+		bhButton.BackgroundColor3 = Color3.fromRGB(255, 0, 4)
 	end
 end)
 button.MouseButton1Click:Connect(function()
